@@ -14,7 +14,7 @@ Network Used- Convolutional Neural Network
 
 Note: Them Full_source.py is a full file of model, if you don't want to run many files, try run it. 
 
-#Installation
+# Installation
 To run this project, you will need to install the following dependencies:  
 Python 3.6 or higher  
 NumPy  
@@ -22,7 +22,7 @@ OpenCV
 Scikit-Learn  
 TensorFlow  
 
-#Explained 
+# Explained 
 • Architecture
 
 • Data Pre-Processing and Data Manipulation
