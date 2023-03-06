@@ -11,4 +11,5 @@ Network Used- Convolutional Neural Network
 4. After training, model saved in model/QuickDraw.h5.
 5. Run QuickDraw_App.py to use window draw and get what you have drawn.
 6. For altering the model, check Model_train.py.
---> Note: Them Full_source.py is a full file of model, if you don't want to run many files, try run it. 
+
+Note: Them Full_source.py is a full file of model, if you don't want to run many files, try run it. 
