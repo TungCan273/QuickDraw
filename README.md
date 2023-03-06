@@ -38,4 +38,4 @@ TensorFlow
 • Flaterning
 
 Note - If Computational power is not enough to train the model on 10-12 Doodled images or .npy files. Download .npy Files [This](https://bit.ly/2P7TDut)  
-Quickdraw API for accessing the Quick Draw data that downloads the data files as and when needed, caches them locally and interprets them so they can be used. API [This](https://bit.ly/2DkRCbz)
+Quickdraw API for accessing the Quick Draw data that downloads the data files as and when needed, caches them locally and interprets them so they can be used. API https://bit.ly/2DkRCbz
