@@ -134,6 +134,6 @@ def main():
   render_training_history(History)
   Inference()
 
-#main()
+main()
 #save model
 model.save('model\QuickDraw.h5')
