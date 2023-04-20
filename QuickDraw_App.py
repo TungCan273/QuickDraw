@@ -10,6 +10,7 @@ import torch
 from LoadData import load_data
 from PIL import Image
 
+
 CLASSES = ['drums', 'alarmclock', 'apple', 'backpack', 'barn', 
                'bed', 'bowtie', 'candle', 'door', 'envelope', 
                'fish', 'guitar', 'icecream', 'mountain', 'star', 
@@ -19,11 +20,12 @@ WHITE_RGB=(255,255,255)
 
 _, _, _, _, classes = load_data('data')
 classes = [c.replace('full_numpy_bitmap_', ' ').replace(' ', '') for c in classes]
+coords = []
+clicked = False
 
 def main():
     # Load model
     model = load_model("model/QuickDraw.h5")
-    #emoji = get_emoji() 
     image = np.zeros((480, 640, 3), dtype=np.float32)
     cv2.namedWindow("Canvas")
     global ix, iy, is_drawing
@@ -47,15 +49,32 @@ def main():
         return x, y
     
     cv2.setMouseCallback('Canvas', paint_draw)
-    while (1):
+    """ 
+   while (1):
         cv2.imshow('Canvas', 255-image)
         key = cv2.waitKey(10)
         if key == 27:
             #image = cv2.resize(image, (28,28)) 
             cv2.imwrite("painted.png", image)
             break
-    cv2.destroyAllWindows()
+    """
+    check_point = False
+    while (1):
+        cv2.imshow('Canvas', 255-image)
+        key = cv2.waitKey(1)
+        #frame = np.zeros((480,640,3), dtype=np.float32)
+        #cv2.imshow("Draw", image)
+        if key == 27:
+            cv2.imwrite("painted.png", image)
+            break
+        elif key == ord('c'):
+            pass 
+        elif key == ord('s'):
+            cv2.imwrite("painted.png", image)
+            del_contour()
+            IMG()
 
+    cv2.destroyAllWindows()
 
 def IMG():
     model = load_model("model/QuickDraw.h5")
@@ -65,8 +84,18 @@ def IMG():
     image = cv2.resize(image, (28,28))
     image = np.array(image, dtype=np.float32)[None, :, :]
     logits = model.predict(image)[0]
-    print(classes[np.argmax(logits)])
-    image = np.zeros((28,28,1), dtype=np.uint8)
+    ans = classes[np.argmax(logits)]
+    print(ans)
+    
+    frame = np.ones((480,480,3))
+    conf = int(max(logits)*10000)/100
+    if conf > 98.0:
+        cv2.putText(frame, "You are drawing " + ans, (10,100), cv2.FONT_HERSHEY_COMPLEX, 1, (0,0,0))
+    else:
+        cv2.putText(frame, "Maybe " + ans, (10,50), cv2.FONT_HERSHEY_COMPLEX, 1, (0,0,0))
+    print(ans, conf)
+    cv2.imshow("Draw", frame)
+    cv2.waitKey(0)
 
 def convert_8bit():
     """
@@ -110,6 +139,6 @@ def del_contour():
 if __name__ == '__main__':
     main()
     #convert_8bit()
-    del_contour()
-    IMG()
+    #del_contour()
+    #IMG()
 
