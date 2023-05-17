@@ -89,6 +89,9 @@ def IMG():
     
     frame = np.ones((480,480,3))
     conf = int(max(logits)*10000)/100
+    print("Accuary: {}%".format(comf))
+    print(ans)
+    
     if conf > 98.0:
         cv2.putText(frame, "You are drawing " + ans, (10,100), cv2.FONT_HERSHEY_COMPLEX, 1, (0,0,0))
     else:
